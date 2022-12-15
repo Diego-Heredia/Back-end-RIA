@@ -1,6 +1,5 @@
 import { Router } from "express";
 import {
-  createEmployee,
   deleteEmployee,
   getEmployee,
   getColaborador,
@@ -30,9 +29,6 @@ router.get("/employees/:id", getEmployee);
 
 // DELETE An Employee
 router.delete("/employees/:id", deleteEmployee);
-
-// INSERT An Employee
-router.post("/employees", createEmployee);
 
 // INSERT An Colaborador
 router.post("/colaborador", createColaborador);
