@@ -79,12 +79,42 @@ export const createEmployee = async (req, res) => {
 };
 export const createColaborador = async (req, res) => {
   try {
-    const { name, salary } = req.body;
+    const {
+      ID,
+      Nombre,
+      Apellido_pat,
+      Apellido_mat,
+      Correo,
+      Telefono,
+      Imagen,
+      IDLider,
+    } = req.body;
     const [rows] = await pool.query(
-      "INSERT INTO employee (name, salary) VALUES (?, ?)",
-      [name, salary]
+      "INSERT INTO Colaborador (ID, Nombre, Apellido_pat, Apellido_mat, Correo, Telefono, Imagen, IDLider) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+      [
+        ID,
+        Nombre,
+        Apellido_pat,
+        Apellido_mat,
+        Correo,
+        Telefono,
+        Imagen,
+        IDLider,
+      ]
     );
-    res.status(201).json({ id: rows.insertId, name, salary });
+    res
+      .status(201)
+      .json({
+        id: rows.insertId,
+        ID,
+        Nombre,
+        Apellido_pat,
+        Apellido_mat,
+        Correo,
+        Telefono,
+        Imagen,
+        IDLider,
+      });
   } catch (error) {
     return res.status(500).json({ message: "Something goes wrong" });
   }
