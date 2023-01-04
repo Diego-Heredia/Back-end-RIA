@@ -79,6 +79,7 @@ export const createEmployee = async (req, res) => {
 };
 export const createColaborador = async (req, res) => {
   try {
+    console.log(req.body);
     const {
       ID,
       Nombre,
@@ -86,11 +87,12 @@ export const createColaborador = async (req, res) => {
       Apellido_mat,
       Correo,
       Telefono,
-      Imagen,
+      IDEquipo,
       IDLider,
     } = req.body;
+    const Imagen = "src";
     const [rows] = await pool.query(
-      "INSERT INTO Colaborador (ID, Nombre, Apellido_pat, Apellido_mat, Correo, Telefono, Imagen, IDLider) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+      "INSERT INTO Colaborador (ID, Nombre, Apellido_pat, Apellido_mat, Correo, Telefono, Imagen, IDEquipo, IDLider) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
       [
         ID,
         Nombre,
@@ -99,24 +101,22 @@ export const createColaborador = async (req, res) => {
         Correo,
         Telefono,
         Imagen,
+        IDEquipo,
         IDLider,
       ]
     );
-    res
-      .status(201)
-      .json({
-        id: rows.insertId,
-        ID,
-        Nombre,
-        Apellido_pat,
-        Apellido_mat,
-        Correo,
-        Telefono,
-        Imagen,
-        IDLider,
-      });
+    res.status(201).json({
+      ID,
+      Nombre,
+      Apellido_pat,
+      Apellido_mat,
+      Correo,
+      Telefono,
+      Imagen,
+      IDLider,
+    });
   } catch (error) {
-    return res.status(500).json({ message: "Something goes wrong" });
+    return res.status(500).json({ message: "Something goes wrong" + error });
   }
 };
 
